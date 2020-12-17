@@ -55,8 +55,8 @@ app.post('/api/login', (req, res) => {
                    for (let user of data) {
                     if (username == user.username && password == user.password) {
                         if(username == user.username && password == user.password) {
-                            let token = jwt.sign({ id: user.id, username: user.username }, secretKey, { expiresIn: '3m'});
-                        
+                            let token = jwt.sign({ username: user.username }, secretKey, { expiresIn: '1m'});
+                        // id: user.id, 
                         res.json({
                             success: true,
                             err: null,
@@ -93,7 +93,7 @@ app.post('/api/login', (req, res) => {
 
 function server()
 {
-    return token;
+    return secretKey;
 }
 module.exports = server;
 
@@ -172,9 +172,8 @@ app.post('/api/signup', (req, res) => {
     // TODO: Insert data 
     // id, title, color {id: req.body.id, budget: req.body.title }
     mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true})
-    
+    console.log(req.body.username);
     const newData = new namesModel({
-        id: req.body.id,
         username: req.body.username,
         password: req.body.password,
     });

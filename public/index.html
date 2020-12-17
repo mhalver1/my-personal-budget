@@ -42,6 +42,15 @@
         
     </header>
 
+    <body onload="checkJWT()">
+        <div id="logged_in" style="display: none">You are logged in</div>
+        <div id="not_logged_in" style="display: none">You are not logged in</div>
+    </body>
+
+    <body onload="alert()">
+        <div id="still_logged_in" style="display: none">You have 20 seconds left</div>
+    </body>
+
     <div class="container-fluid">
         <h1 class="row">Login</h1>
         <main>
@@ -64,17 +73,21 @@
     </div>
 
     <div class="container-fluid">
-        <h1 class="row">Sign up</h1>
+        <h1 class="row">Sign Up</h1>
         <main>
-            <form action="/api/signup" method="POST">
-                <label for="id">id: </label>
-                <input type="number" name="id"/><br>
-                <label for="username">Username: </label>
-                <input type="text" name="username"/><br>
-                <label for="password">Password: </label>
-                <input type="text" name="password"/><br>
-                <input type="submit"/><br>
-            </form>
+            <div class="row">
+                <label for="username2">Username</label>
+                <input type="text" name="username2" id="username2">
+            </div>
+            
+            <div class="row">
+                <label for="password2">Password</label>
+                <input type="password" name="password2" id="password2">
+            </div>
+            
+            <div>
+            <button onclick="signup()">Sign Up</button>
+            </div>
         </main>
     </div>
 
@@ -102,6 +115,19 @@
             });
         }
 
+        function signup() {
+            const data = {
+                username: document.getElementById('username2').value,
+                password: document.getElementById('password2').value,
+            };
+            axios.post('/api/signup', data)
+            .then(res => {
+                console.log(res);
+                document.getElementById('username2').value = '';
+                document.getElementById('password2').value = '';
+            });
+        }
+
         function logout() {
             setTimeout(function(){
             localStorage.removeItem('jwt')
@@ -109,6 +135,25 @@
             }, 1);  
         }
         
+        function checkJWT() {
+            if(localStorage.getItem("jwt") != null) {
+                console.log("you are logged in");
+                document.getElementById("logged_in").style.display = "block";
+            }
+            else{
+                console.log("you are not logged in");
+                document.getElementById("not_logged_in").style.display = "block";
+            }
+        }
+
+        function alert() {
+            console.log("you have 20 seconds left");
+            document.getElementById("still_logged_in").style.display = "block";
+            setTimeout(function(){
+            //window.location.href = 'http://localhost:3000/';
+            }, 40000);  
+        }
+        //10000
         // function onLoad() {
         //     const token = localStorage.getItem('jwt');
         //     if (token) {
