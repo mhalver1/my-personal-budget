@@ -1,8 +1,7 @@
 const express = require('express');
 const app = express();
-
 const jwt = require('jsonwebtoken');
-
+const compression = require('compression');
 const cookieParser = require('cookie-parser');
 const jwt_decode = require ("jwt-decode");
 const exjwt = require('express-jwt');
@@ -21,6 +20,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use('/', express.static('public'));
+app.use(compression());
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
@@ -88,6 +88,33 @@ app.post('/api/login', (req, res) => {
     .catch((connectionError)=>{
        console.log(connectionError)
     })
+
+});
+
+app.post('/api/twenty', (req, res) => {
+    console.log(req.headers.authorization);
+    const authHeader = req.headers.authorization;
+    if (authHeader){
+        const token = authHeader.split(' ')[1];
+        jwt.verify(token, secretKey, (err, data)=>{
+            if (err){res.send(err)}
+            const decoded = jwt.verify(token, secretKey);
+            console.log(decoded.username);
+    mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true})
+    
+    let token = jwt.sign({ username: decoded.username }, secretKey, { expiresIn: '1m'});
+                        // id: user.id, 
+                        res.json({
+                            success: true,
+                            err: null,
+                            token
+                        });
+
+                
+        }); 
+    } else {
+        res.sendStatus(403).send("Error 403")
+    }
 
 });
 
@@ -199,12 +226,6 @@ app.post('/api/configure', (req, res) => {
         const token = authHeader.split(' ')[1];
         jwt.verify(token, secretKey, (err, data)=>{
             if (err){res.send(err)}
-            //connect to the database 
-            // perform 
-            // console.log(token);
-            //     res.send(data)
-            //     console.log(data);
-            //     console.log(req.body.budgetName);
             const decoded = jwt.verify(token, secretKey);
             console.log(decoded.username);
     mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true})

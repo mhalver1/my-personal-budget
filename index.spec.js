@@ -1,12 +1,12 @@
 /// <reference types="cypress" />
 
-context('Home', () => {
+describe('Home', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000')
   })
 
-  it('should have Welcome in the h1', () => {
-    cy.get('h1').contains('Welcome')
+  it('should have Personal Budget in the h1', () => {
+    cy.get('h1').contains('Personal Budget')
   })
 
   it('should look the same', () => {
