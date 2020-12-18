@@ -38,14 +38,6 @@ const jwtMW = exjwt({
     algorithms: ['HS256']
 });
 
-// var http = require('http');
-// http.createServer(function (req, res) {
-//   res.write('Hi from YOUR_NAME!');
-//   res.end();
-// }).listen(3000, function(){
-//  console.log("Server running at port 3000");
-// });
-
 
 app.post('/api/login', (req, res) => {
 
