@@ -30,13 +30,22 @@ app.use((req, res, next) => {
 
 let url = 'mongodb://localhost:27017/mongodb_project';
 
-const PORT = 3000;
+const PORT = 3001;
 
 const secretKey = 'My super secret key';
 const jwtMW = exjwt({
     secret: secretKey,
     algorithms: ['HS256']
 });
+
+// var http = require('http');
+// http.createServer(function (req, res) {
+//   res.write('Hi from YOUR_NAME!');
+//   res.end();
+// }).listen(3000, function(){
+//  console.log("Server running at port 3000");
+// });
+
 
 app.post('/api/login', (req, res) => {
 
