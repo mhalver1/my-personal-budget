@@ -38,6 +38,11 @@ const jwtMW = exjwt({
     algorithms: ['HS256']
 });
 
+function server()
+{
+    return PORT;
+}
+module.exports = server;
 
 app.post('/api/login', (req, res) => {
 
@@ -96,14 +101,14 @@ app.post('/api/twenty', (req, res) => {
     console.log(req.headers.authorization);
     const authHeader = req.headers.authorization;
     if (authHeader){
-        const token = authHeader.split(' ')[1];
+        let token = authHeader.split(' ')[1];
         jwt.verify(token, secretKey, (err, data)=>{
             if (err){res.send(err)}
             const decoded = jwt.verify(token, secretKey);
             console.log(decoded.username);
     mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true})
     
-    let token = jwt.sign({ username: decoded.username }, secretKey, { expiresIn: '1m'});
+    token = jwt.sign({ username: decoded.username }, secretKey, { expiresIn: '1m'});
                         // id: user.id, 
                         res.json({
                             success: true,
@@ -118,12 +123,6 @@ app.post('/api/twenty', (req, res) => {
     }
 
 });
-
-function server()
-{
-    return secretKey;
-}
-module.exports = server;
 
 app.get('/api/signedup', (req, res) => {
 
@@ -292,28 +291,6 @@ app.post('/api/expense', (req, res) => {
         res.sendStatus(403).send("Error 403")
     }
 
-});
-
-app.get('/api/settings', jwtMW, (req, res) => {
-    res.json({
-        success: true,
-        myContent: 'Secret content that only logged in people can see.'
-    });
-});
-
-app.get('/api/dashboard', jwtMW, (req, res) => {
-    res.json({
-        success: true,
-        myContent: 'Secret content that only logged in people can see.'
-    });
-    console.log(jwtMW);
-});
-
-app.get('/api/prices', jwtMW, (req, res) => {
-    res.json({
-        success: true,
-        myContent: 'This is the price $3.99.'
-    });
 });
 
 app.get('/', (req, res) => {

@@ -106,6 +106,7 @@
                 if (res && res.data && res.data.success) {
                     token = res.data.token;
                     localStorage.setItem('jwt', token);
+                    window.location.href = '/configure.html';
                     //getDashboard();
                     //getSettings()
                 }

@@ -1,5 +1,7 @@
 const server = require('./server')
-
-test('properly makes token', () => {
-    expect(server()).not.toBe(undefined)
+//Unit Test
+test('Port should be 3001 and not 3000', () => {
+    expect(server()).not.toBe(3000)
+    expect(server()).toBe(3001)
 })
+

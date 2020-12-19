@@ -165,6 +165,7 @@
                 if (res && res.data && res.data.success) {
                     token = res.data.token;
                     localStorage.setItem('jwt', token);
+                    window.location.href = '/dashboard.html';
                     //getDashboard();
                     //getSettings()
                 }
@@ -268,51 +269,51 @@
                     //     dataSourceThree.labels[count]=res.data[i].budgetName;
                     // dataSourceThree.datasets[0].data[count]=res.data[i].budgetSpent;
                     // console.log(res.data[i].month);
-                    if(res.data[i].month == "January")
+                    if(res.data[i].month == "January" || res.data[i].month == "january")
                     {
                         dataSourceThree.datasets[0].data[0] += res.data[i].budgetSpent;
                     }
-                    else if(res.data[i].month == "February")
+                    else if(res.data[i].month == "February" || res.data[i].month == "february")
                     {
                         dataSourceThree.datasets[0].data[1] += res.data[i].budgetSpent;
                     }
-                    else if(res.data[i].month == "March")
+                    else if(res.data[i].month == "March" || res.data[i].month == "march")
                     {
                         dataSourceThree.datasets[0].data[2] += res.data[i].budgetSpent;
                     }
-                    else if(res.data[i].month == "April")
+                    else if(res.data[i].month == "April" || res.data[i].month == "april")
                     {
                         dataSourceThree.datasets[0].data[3] += res.data[i].budgetSpent;
                     }
-                    else if(res.data[i].month == "May")
+                    else if(res.data[i].month == "May" || res.data[i].month == "may")
                     {
                         dataSourceThree.datasets[0].data[4] += res.data[i].budgetSpent;
                     }
-                    else if(res.data[i].month == "June")
+                    else if(res.data[i].month == "June" || res.data[i].month == "june")
                     {
                         dataSourceThree.datasets[0].data[5] += res.data[i].budgetSpent;
                     }
-                    else if(res.data[i].month == "July")
+                    else if(res.data[i].month == "July" || res.data[i].month == "july")
                     {
                         dataSourceThree.datasets[0].data[6] += res.data[i].budgetSpent;
                     }
-                    else if(res.data[i].month == "August")
+                    else if(res.data[i].month == "August" || res.data[i].month == "august")
                     {
                         dataSourceThree.datasets[0].data[7] += res.data[i].budgetSpent;
                     }
-                    else if(res.data[i].month == "September")
+                    else if(res.data[i].month == "September" || res.data[i].month == "september")
                     {
                         dataSourceThree.datasets[0].data[8] += res.data[i].budgetSpent;
                     }
-                    else if(res.data[i].month == "October")
+                    else if(res.data[i].month == "October" || res.data[i].month == "October")
                     {
                         dataSourceThree.datasets[0].data[9] += res.data[i].budgetSpent;
                     }
-                    else if(res.data[i].month == "November")
+                    else if(res.data[i].month == "November" || res.data[i].month == "november")
                     {
                         dataSourceThree.datasets[0].data[10] += res.data[i].budgetSpent;
                     }
-                    else if(res.data[i].month == "December")
+                    else if(res.data[i].month == "December" || res.data[i].month == "december")
                     {
                         dataSourceThree.datasets[0].data[11] += res.data[i].budgetSpent;
                     }
