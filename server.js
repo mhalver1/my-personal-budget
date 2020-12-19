@@ -21,6 +21,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use('/', express.static('public'));
 app.use(compression());
+//added gzip compression
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', 'http://165.227.82.127/');
